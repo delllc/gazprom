@@ -22,10 +22,12 @@ return new class extends Migration
             $table->id();
             $table->string('username')->unique();
             $table->string('password');
-            $table->string('name');
+            $table->string('name')->nullable(false);
+            $table->string('position');
+            $table->string('departament');
             $table->string('role')->default('employee'); // admin/employee
-            $table->string('email')->unique();
-            $table->string('phone')->nullable();
+            $table->string( 'email')->unique();
+            $table->string('phone')->unique()->nullable(false);
             $table->rememberToken();
             $table->timestamps();
         });
