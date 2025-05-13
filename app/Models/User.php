@@ -12,17 +12,22 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+
+    const ROLE_ADMIN = 'admin';
+    const ROLE_EMPLOYEE = 'employee';
+
     /**
      * The attributes that are mass assignable.
      *
      * @var list<string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'position',
+        'username',
         'departament',
         'email',
+        'role',
         'phone',
         'password',
     ];
@@ -48,6 +53,23 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+    public function isAdmin(): bool
+    {
+        return $this->role === self::ROLE_ADMIN;
+    }
+    // Метод для создания пользователя администратором
+
+    public static function createByAdmin(array $data): User
+    {
+        return self::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
+            'role' => $data['role'] ?? self::ROLE_EMPLOYEE,
+            'phone' => $data['phone'] ?? null,
+        ]);
     }
 
     public function tasks()
