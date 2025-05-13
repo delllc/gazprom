@@ -31,13 +31,87 @@ export interface SharedData {
     [key: string]: unknown;
 }
 
-export interface User {
+// types/models.ts
+
+// Пользователь
+// User
+interface User {
+    id: number;
+    username: string;
+    name: string;
+    role: 'admin' | 'employee';
+    email: string;
+    phone?: string;
+}
+
+// Event
+interface Event {
+    id: number;
+    title: string;
+    description: string;
+    start_date: string;
+    end_date?: string;
+    participants_count?: number;
+    is_participating?: boolean;
+}
+
+// Task
+interface Task {
+    id: number;
+    user_id: number;
+    title: string;
+    description?: string;
+    completed: boolean;
+    completed_at?: string;
+    created_at: string;
+}
+
+// Document
+interface Document {
     id: number;
     name: string;
-    email: string;
-    avatar?: string;
-    email_verified_at: string | null;
+    type: 'general' | 'normative' | 'styles';
+    file_path: string;
+    uploaded_by: number;
     created_at: string;
-    updated_at: string;
-    [key: string]: unknown; // This allows for additional properties...
+}
+
+// Notification
+interface Notification {
+    id: number;
+    user_id: number;
+    title: string;
+    message: string;
+    is_read: boolean;
+    created_at: string;
+}
+
+// Media
+interface MediaFolder {
+    id: number;
+    name: string;
+    parent_id?: number;
+}
+
+interface Media {
+    id: number;
+    name: string;
+    description?: string;
+    file_path: string;
+    type: string;
+    folder_id?: number;
+    uploaded_by: number;
+    created_at: string;
+}
+
+// News
+interface News {
+    id: number;
+    title: string;
+    content: string;
+    image?: string;
+    published_at: string;
+    short_description: string;
+    author_id: number;
+    author?: User;
 }
