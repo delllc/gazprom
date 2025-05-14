@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Document extends Model
+class Documents extends Model
 {
+
+    use HasFactory;
     const TYPE_GENERAL = 'general';
     const TYPE_NORMATIVE = 'normative';
     const TYPE_STYLE = 'style';

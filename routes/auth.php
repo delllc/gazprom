@@ -10,6 +10,7 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\Search\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -64,3 +65,4 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
 Route::post('/password-reset-request', [PasswordResetController::class, 'requestReset']);
 Route::post('/reset-password', [PasswordResetController::class, 'reset']);
 
+Route::get('/search', [SearchController::class, 'globalSearch']);
