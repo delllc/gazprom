@@ -2,11 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
 class Task extends Model
 {
+    use Notifiable;
     protected $fillable = [
         'user_id',
         'title',

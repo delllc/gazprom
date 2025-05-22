@@ -1,10 +1,10 @@
 <?php
 
-
 namespace Tests\Unit\Models;
 
 use App\Models\Notifications;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -19,7 +19,7 @@ class NotificationsTest extends TestCase
             'user_id',
             'type',
             'message',
-            'ts_read',
+            'is_read',
             'notifiable_type',
             'notifiable_id'
         ];
@@ -29,25 +29,36 @@ class NotificationsTest extends TestCase
     /** @test */
     public function it_belongs_to_user()
     {
-        $notification = Notifications::factory()
-            ->for(User::factory())
-            ->create();
+        $user = User::factory()->create();
+        $notification = Notifications::factory()->create(['user_id' => $user->id]);
 
         $this->assertInstanceOf(User::class, $notification->user);
+        $this->assertEquals($user->id, $notification->user->id);
     }
 
     /** @test */
     public function it_can_morph_to_notifiable()
     {
-        $model = new class extends \Illuminate\Database\Eloquent\Model {
+        // Создаем тестовую модель для полиморфной связи
+        $testModel = new class extends Model {
+            protected $table = 'test_models';
+            protected $guarded = [];
         };
-        $model->save();
+
+        // Создаем таблицу для тестовой модели
+        \Schema::create('test_models', function ($table) {
+            $table->id();
+            $table->timestamps();
+        });
+
+        $testModel->save(); // Сохраняем, чтобы получить ID
 
         $notification = Notifications::factory()->create([
-            'notifiable_type' => get_class($model),
-            'notifiable_id' => $model->id
+            'notifiable_type' => get_class($testModel),
+            'notifiable_id' => $testModel->id
         ]);
 
-        $this->assertNotNull($notification->notifiable);
+        $this->assertInstanceOf(get_class($testModel), $notification->notifiable);
+        $this->assertEquals($testModel->id, $notification->notifiable->id);
     }
 }

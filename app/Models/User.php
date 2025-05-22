@@ -3,6 +3,7 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\AdminNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -81,14 +82,18 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Event::class, 'event_user');
     }
-
+//
     public function notifications()
     {
-        return $this->hasMany(Notification::class)->orderBy('created_at', 'desc');
+        return $this->hasMany(Notifications::class)->orderBy('created_at', 'desc');
     }
 
     public function unreadNotifications()
     {
         return $this->notifications()->where('is_read', false);
+    }
+
+    public function sendAdminAlert(string $message, string $changeType) {
+        $this->notify(new AdminNotification($message, $changeType));
     }
 }

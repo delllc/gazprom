@@ -2,19 +2,25 @@
 
 namespace Database\Factories;
 
+use App\Models\Documents;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
 
 class DocumentsFactory extends Factory
 {
+
+    protected $model = Documents::class;
+
     public function definition()
     {
         return [
-            'name' => $this->faker->sentence(3),
-            'type' => $this->faker->randomElement(['vaction', 'normative', 'style']),
-            'file_path' => 'documents/'.$this->faker->uuid().'.pdf',
+            'name' => $this->faker->word,
+            'title' => $this->faker->sentence,
+            'type' => $this->faker->randomElement(['contract', 'report', 'invoice']),
+            'assigned_user_id' => User::factory(),
             'uploaded_by' => User::factory(),
-            'created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
+            'file_path' => 'documents/'.$this->faker->uuid.'.pdf',
+            'status' => $this->faker->randomElement(['draft', 'published', 'archived'])
         ];
     }
 

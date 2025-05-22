@@ -15,10 +15,13 @@ class SearchTest extends TestCase
     {
         // 1. Создаем тестовые данные с ОДИНАКОВЫМ поисковым запросом
         $searchTerm = 'LaravelTestQuery'; // Уникальный термин для всех записей
+        $assignedUser = User::factory()->create();
 
         $document = Documents::factory()->create([
             'name' => "Document about {$searchTerm}",
-            'type' => "vaction"
+            'type' => "vaction",
+            'assigned_user_id' => $assignedUser->id,
+            'uploaded_by' => $assignedUser->id
         ]);
 
         $news = News::factory()->create([

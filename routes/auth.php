@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\AdminNotificationController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\Auth\PasswordResetController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\DocumentController;
+use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Search\SearchController;
 use Illuminate\Support\Facades\Route;
 
@@ -56,13 +59,22 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+
+    // Notify
+    Route::get('/notifications', [NotificationsController::class, 'index']);
+    Route::post('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead']);
+    Route::post('/documents', [DocumentController::class, 'store']);
 });
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->group(function () {
     Route::post('/users', [UserController::class, 'create']);
+    Route::post('/notify', [AdminNotificationController::class, 'massNotify']);
 });
 
 Route::post('/password-reset-request', [PasswordResetController::class, 'requestReset']);
 Route::post('/reset-password', [PasswordResetController::class, 'reset']);
 
 Route::get('/search', [SearchController::class, 'globalSearch']);
+
+
+
