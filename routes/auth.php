@@ -63,6 +63,9 @@ Route::middleware('auth')->group(function () {
     // Notify
     Route::get('/notifications', [NotificationsController::class, 'index']);
     Route::post('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead']);
+    Route::get('/notifications/unread-count', [NotificationsController::class, 'unreadCount']);
+
+
     Route::post('/documents', [DocumentController::class, 'store']);
 });
 

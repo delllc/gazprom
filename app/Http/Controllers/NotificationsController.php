@@ -21,4 +21,10 @@ class NotificationsController extends Controller
         $notification->update(['is_read' => true]);
         return response()->noContent();
     }
+
+    public function unreadCount() {
+        return response()->json([
+            'count' => auth()->user()->unreadNotifications()->count()
+        ]);
+    }
 }
