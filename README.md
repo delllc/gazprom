@@ -87,3 +87,14 @@ GET /employees?department=IT (фильтр по отделам)
 GET /documents?type=normative
 
 POST /notifications (рассылка уведомлений)
+
+
+## Install and requirements
+---
+
+1. npm i && composer require
+2. installed Herd 
+3. edit .env.example in db connection in your data 
+4. php artisan migrate
+5. npm run dev
+6. >> http://localhost

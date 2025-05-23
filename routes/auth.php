@@ -17,6 +17,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\NotificationsController;
 use App\Http\Controllers\Search\SearchController;
+use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -73,7 +74,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/events/{event}/participants/all', [EventController::class, 'getAllParticipants']);
 
 
-    Route::apiResource('tasks', TasksController::class);
+    Route::apiResource('tasks', TaskController::class);
     Route::apiResource('users', UserController::class);
     Route::apiResource('documents', DocumentController::class);
     Route::apiResource('media', MediaController::class)->middleware('admin');
