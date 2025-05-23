@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Tasks;
 use Illuminate\Support\ServiceProvider;
+use function Pest\Laravel\delete;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Tasks::where('completed', true)->where('completed', 'true', now())->delete();
     }
 }

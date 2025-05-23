@@ -25,4 +25,16 @@ class EventController extends Controller
 
         return auth()->user()->events()->create($validated);
     }
+
+    public function getParticipants(Events $event) {
+        return response()->json([
+            'count' => $event->participants->count(),
+            'preview' => $event->participants->take(5)->get(),
+        ]);
+    }
+
+    public function getAllParticipants(Events $event)
+    {
+        return $event->participants()->paginate(20);
+    }
 }

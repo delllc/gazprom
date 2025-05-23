@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Documents;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class DocumentController extends Controller
 {
@@ -30,5 +31,21 @@ class DocumentController extends Controller
         );
 
         return response()->json($document, 201);
+    }
+
+
+    pulbic function upload(Request $request) {
+        $file = $request->file('document')->store('documents');
+
+        Documents::create([
+            'path' => $file,
+            'type' => $request->type,
+            'uploaded_by' => auth()->id()
+        ]);
+    }
+
+    public function download(Documents $document)
+    {
+        return Storage::download($document->path);
     }
 }

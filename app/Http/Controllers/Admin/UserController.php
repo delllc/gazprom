@@ -27,4 +27,11 @@ class UserController extends Controller {
             'user' => $user->makeHidden(['password'])
         ], 201);
     }
+
+    public function index(Request $request) {
+        return User::query()
+            ->when($request->departament, fn($q, $dept) => $q->where('departament', $dept))
+            ->when($request->search, fn($q, $search) => $q->where('name', 'like', '%' . $search . '%'))
+            ->paginate(15);
+    }
 }

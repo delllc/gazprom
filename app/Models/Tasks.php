@@ -6,7 +6,7 @@ use App\Traits\Notifiable;
 use Illuminate\Database\Eloquent\Model;
 use Carbon\Carbon;
 
-class Task extends Model
+class Tasks extends Model
 {
     use Notifiable;
     protected $fillable = [
@@ -29,15 +29,11 @@ class Task extends Model
     }
 
     // Scope для автоматического удаления старых задач
-    protected static function boot()
+    protected static function booted()
     {
-        parent::boot();
-
-        static::addGlobalScope('not_old_completed', function ($builder) {
-            $builder->where(function ($query) {
-                $query->where('completed', false)
-                    ->orWhere('completed_at', '>', Carbon::now()->subDays(7));
-            });
+        static::creating(function ($task) {
+            $task->delete_at = now()->addDays(7);
+            $task->save();
         });
     }
 }
