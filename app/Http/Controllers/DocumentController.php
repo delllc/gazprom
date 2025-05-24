@@ -34,7 +34,7 @@ class DocumentController extends Controller
     }
 
 
-    pulbic function upload(Request $request) {
+    public function upload(Request $request) {
         $file = $request->file('document')->store('documents');
 
         Documents::create([

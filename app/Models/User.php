@@ -23,7 +23,6 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
         'position',
         'username',
         'departament',
@@ -64,7 +63,6 @@ class User extends Authenticatable
     public static function createByAdmin(array $data): User
     {
         return self::create([
-            'name' => $data['name'],
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
