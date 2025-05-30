@@ -1,7 +1,5 @@
 <?php
 
-// app/Mail/PasswordResetMail.php
-
 namespace App\Mail;
 
 use Illuminate\Bus\Queueable;
@@ -32,9 +30,9 @@ class PasswordResetMail extends Mailable
      */
     // app/Mail/PasswordResetMail.php
 
-    public function build()
+    public function build(): PasswordResetMail
     {
-        $expiration = config('auth.passwords.users.expire', 60); // 60 минут по умолчанию
+       $expiration = config('auth.passwords.users.expire', 60); // 60 минут по умолчанию
 
         return $this->subject('Сброс пароля для ' . config('app.name'))
             ->markdown('emails.password-reset')

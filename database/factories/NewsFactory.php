@@ -7,17 +7,18 @@ use App\Models\User;
 
 class NewsFactory extends Factory
 {
-    public function definition()
+    public function definition(): array
     {
-        return [
-            'title' => $this->faker->sentence(5),
-            'short_description' => $this->faker->sentence(10),
-            'content' => $this->faker->paragraphs(3, true),
-            'image' => $this->faker->optional()->imageUrl(800, 600),
-            'author_id' => User::factory(),
-            'published_at' => $this->faker->dateTimeBetween('-1 month', 'now')
 
-        ];
+        return [
+             'title' => $this->faker->sentence(5),
+             'short_description' => $this->faker->sentence(10),
+             'content' => $this->faker->paragraphs(3, true),
+             'image' => $this->faker->optional()->imageUrl(800, 600),
+             'author_id' => User::factory(),
+             'published_at' => $this->faker->dateTimeBetween('-1 month', 'now')
+
+         ];
     }
 
 }

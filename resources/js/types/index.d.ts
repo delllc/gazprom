@@ -38,6 +38,8 @@ export interface SharedData {
 interface User {
     id: number;
     username: string;
+    name: string;
+    role: 'admin' | 'employee';
     email: string;
     phone?: string;
 }
