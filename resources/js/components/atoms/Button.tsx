@@ -6,9 +6,11 @@ interface ButtonProps {
     variant?: 'primary' | 'secondary';
     size?: 'small' | 'medium' | 'large';
     disabled?: boolean;
+    className?: string;
+    type?: 'submit' | 'button' | undefined;
 }
 
-const Button: React.FC<ButtonProps> = ({ onClick, children, variant = 'primary', size = 'medium', disabled = false }) => {
+const Button: React.FC<ButtonProps> = ({ type = 'button', className, onClick, children, variant = 'primary', size = 'medium', disabled = false }) => {
     const buttonClasses = cn(
         'transition-color rounded px-4 py-2 font-bold',
         {
@@ -24,7 +26,7 @@ const Button: React.FC<ButtonProps> = ({ onClick, children, variant = 'primary',
     );
 
     return (
-        <button type="button" className={buttonClasses} onClick={onClick} disabled={disabled}>
+        <button type={type} className={cn(buttonClasses, className)} onClick={onClick} disabled={disabled}>
             {children}
         </button>
     );

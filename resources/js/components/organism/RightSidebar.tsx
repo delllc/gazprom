@@ -1,0 +1,58 @@
+import Button from '@/components/atoms/Button';
+import { Calendar } from '@/components/organism/Calendar';
+import { EventList } from '@/components/organism/EventList';
+import React, { useState } from 'react';
+
+interface Event {
+    title: string;
+    dateTime: Date;
+    location: string;
+    participants: string[];
+}
+
+interface RightSidebarProps {
+    events: Event[];
+}
+
+export const RightSidebar: React.FC<RightSidebarProps> = ({ events }) => {
+    const [currentDate, setCurrentDate] = useState(new Date()); // текущий месяц/год
+    const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
+
+    const handleSelectDate = (date: Date) => {
+        setSelectedDate(date);
+    };
+
+    const handlePrevMonth = () => {
+        setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1));
+    };
+
+    const handleNextMonth = () => {
+        setCurrentDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1));
+    };
+    return (
+        <aside className="w-72 p-4">
+            {/* Календарь */}
+            <Calendar
+                date={currentDate}
+                selectedDate={selectedDate || undefined}
+                onSelectDate={handleSelectDate}
+                onPrevMonth={handlePrevMonth}
+                onNextMonth={handleNextMonth}
+            />
+            <div className="mt-4 rounded bg-white p-4 shadow-sm">
+                {/* Кнопка "Добавить мероприятие" */}
+                <div className="mt-4">
+                    <Button className="w-[100%]" size="small" onClick={() => alert('Добавить мероприятие')}>
+                        + Добавить мероприятие
+                    </Button>
+                </div>
+
+                {/* Список событий */}
+                <div className="mt-4">
+                    <h3 className="border-b-black text-lg font-bold">Вы собираетесь на:</h3>
+                    <EventList events={events} />
+                </div>
+            </div>
+        </aside>
+    );
+};

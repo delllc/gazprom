@@ -8,7 +8,6 @@ use App\Models\User;
 
 class DocumentsFactory extends Factory
 {
-
     protected $model = Documents::class;
 
     public function definition()
@@ -16,7 +15,7 @@ class DocumentsFactory extends Factory
         return [
             'name' => $this->faker->word,
             'title' => $this->faker->sentence,
-            'type' => $this->faker->randomElement(['contract', 'report', 'invoice']),
+            'type' => $this->faker->randomElement(['general', 'normative', 'firm']),
             'assigned_user_id' => User::factory(),
             'uploaded_by' => User::factory(),
             'file_path' => 'documents/'.$this->faker->uuid.'.pdf',

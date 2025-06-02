@@ -1,18 +1,42 @@
+import { RightSidebar } from '@/components/organism/RightSidebar';
 import { Sidebar } from '@/components/organism/Sidebar';
 import { TopBar } from '@/components/organism/TopBar';
 import React from 'react';
 
-interface LayoutProps {
-    children: React.ReactNode;
-    sidebarMenu: {
-        label: string;
-        icon: string;
-        to?: string;
-        onClick?: () => void;
-    }[];
-}
+const events = [
+    {
+        title: 'Event 1',
+        dateTime: new Date(),
+        location: 'Moscow',
+        participants: ['andre', 'log'],
+    },
+];
 
-export const Layout: React.FC<LayoutProps> = ({ children, sidebarMenu }) => {
+const sidebarMenu = [
+    {
+        label: 'Список сотрудников',
+        to: '/employees',
+    },
+    {
+        label: 'Общие документы',
+        to: '/document',
+    },
+    {
+        label: 'Нормативные документы',
+        to: '/document?type=normative',
+    },
+    {
+        label: 'Фирменные стили',
+        to: '/document?type=firm',
+    },
+
+    {
+        label: 'Мультимедийная библиотека',
+        to: '/',
+    },
+];
+
+export const Layout: React.FC = ({ children }) => {
     return (
         <div className="flex h-screen">
             {/* Боковая панель */}
@@ -31,7 +55,10 @@ export const Layout: React.FC<LayoutProps> = ({ children, sidebarMenu }) => {
                 />
 
                 {/* Основное содержимое страницы */}
-                <main className="overflow-auto bg-gray-100 p-6">{children}</main>
+                <main className="h-full overflow-auto bg-gray-100 p-6">{children}</main>
+                <div className="fixed top-[59px] right-0 h-full w-72 overflow-y-auto">
+                    <RightSidebar events={events} />
+                </div>
             </div>
         </div>
     );

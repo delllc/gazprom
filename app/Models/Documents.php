@@ -10,11 +10,14 @@ class Documents extends Model
 {
     use Notifiable;
     use HasFactory;
-    const TYPE_GENERAL = 'general';
-    const TYPE_NORMATIVE = 'normative';
-    const TYPE_STYLE = 'style';
-    const TYPE_VACATION = 'vacation';
 
+    protected $table = 'documents';
+
+
+    public const TYPE_GENERAL = 'general';
+    public const TYPE_NORMATIVE = 'normative';
+    public const TYPE_STYLE = 'style';
+    public const TYPE_VACATION = 'vacation';
     protected $fillable = [
         'name',
         'title',
@@ -30,9 +33,18 @@ class Documents extends Model
     ];
 
 
+
+
     // Отношения
     public function uploader()
     {
         return $this->belongsTo(User::class, 'uploaded_by');
+
+    }
+
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id');
     }
 }

@@ -11,11 +11,14 @@ use Illuminate\Notifications\Notifiable;
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory;
+    use Notifiable;
+
+    protected $table = 'users';
 
 
-    const ROLE_ADMIN = 'admin';
-    const ROLE_EMPLOYEE = 'employee';
+    public const ROLE_ADMIN = 'admin';
+    public const ROLE_EMPLOYEE = 'employee';
 
     /**
      * The attributes that are mass assignable.
@@ -58,6 +61,8 @@ class User extends Authenticatable
     {
         return $this->role === self::ROLE_ADMIN;
     }
+
+
     // Метод для создания пользователя администратором
 
     public static function createByAdmin(array $data): User
@@ -73,14 +78,14 @@ class User extends Authenticatable
 
     public function tasks()
     {
-        return $this->hasMany(Task::class);
+        return $this->hasMany(Tasks::class);
     }
 
     public function events()
     {
-        return $this->belongsToMany(Event::class, 'event_user');
+        return $this->belongsToMany(Events::class, 'event_user');
     }
-//
+    //
     public function notifications()
     {
         return $this->hasMany(Notifications::class)->orderBy('created_at', 'desc');
@@ -91,7 +96,8 @@ class User extends Authenticatable
         return $this->notifications()->where('is_read', false);
     }
 
-    public function sendAdminAlert(string $message, string $changeType) {
+    public function sendAdminAlert(string $message, string $changeType)
+    {
         $this->notify(new AdminNotification($message, $changeType));
     }
 }

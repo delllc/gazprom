@@ -11,33 +11,27 @@ interface EventCardProps {
     isAttending?: boolean;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ title, dateTime, location, organizerName, participantsCount = 0, isAttending = false }) => {
+const EventCard: React.FC<EventCardProps> = ({ title, dateTime, location, isAttending = false }) => {
     const formattedDate = dateTime.toLocaleDateString();
     const formattedTime = dateTime.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
     return (
-        <div className="mb-4 rounded bg-white p-4 shadow-md">
+        <div className="mb-4 rounded bg-white">
             <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                    <div className="ml-2">
-                        <Text as="h3" className="text-lg font-bold">
+                    <div className="mt-2 ml-2">
+                        <Text as="h3" className="text-[14px] font-bold">
                             {title}
                         </Text>
-                        <Text as="p" className="text-sm text-gray-500">
+                        <Text as="p" className="mt-2 mb-2 text-[12px] text-[#202224]">
                             {formattedDate} {formattedTime}
                         </Text>
-                        <Text as="p" className="text-sm text-gray-500">
+                        <Text as="p" className="text-[12px] text-[#202224]">
                             {location}
                         </Text>
                     </div>
                 </div>
                 <div>{isAttending && <Icon name="check-circle" className="text-blue-500" />}</div>
-            </div>
-            <div className="mt-2 flex space-x-2">
-                {/* {/* Участники  */}
-                {/* {[...Array(participantsCount)].map((_, index) => ( */}
-                {/*     <Avatar key={index} src={`https://example.com/avatar${index + 1}.jpg`} size="small" /> */}
-                {/* ))} */}
             </div>
         </div>
     );

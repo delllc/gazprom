@@ -1,9 +1,9 @@
 import { cn } from '@/lib/utils';
-import Text from '../atoms/Text';
+import Link from '../atoms/Link';
 
 interface SidebarItem {
     label: string;
-    to?: string;
+    to: string;
     onClick?: () => void;
     className?: string;
 }
@@ -17,9 +17,9 @@ const SidebarItem: React.FC<SidebarItem> = ({ label, to, className, onClick }) =
 
     return (
         <div className={(cn('flex cursor-pointer items-center p-2 hover:bg-gray-200'), className)} onClick={handleClick}>
-            <Text as="span" className="text-[13px]">
+            <Link to={to} className="text-[13px]">
                 {label}
-            </Text>
+            </Link>
         </div>
     );
 };

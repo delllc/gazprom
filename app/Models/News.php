@@ -10,6 +10,7 @@ class News extends Model
 {
     use Notifiable;
     use HasFactory;
+    protected $table = 'news';
     protected $fillable = [
         'title',
         'short_description',

@@ -10,7 +10,7 @@ interface DropdownTriggerProps {
 const DropdownTrigger: React.FC<DropdownTriggerProps> = ({ onClick, icon }) => {
     return (
         <button type="button" className="flex items-center text-gray-700 hover:text-gray-900 focus:outline-none" onClick={onClick}>
-            {icon && <Icon name={icon} className="ml-2" />}
+            {icon && <Icon name={icon} className="ml-2 rounded-full border" />}
         </button>
     );
 };

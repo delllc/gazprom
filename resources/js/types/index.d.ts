@@ -23,7 +23,7 @@ export interface NavItem {
 }
 
 export interface SharedData {
-    name: string;
+    username: string;
     quote: { message: string; author: string };
     auth: Auth;
     ziggy: Config & { location: string };
@@ -35,10 +35,11 @@ export interface SharedData {
 
 // Пользователь
 // User
-interface User {
+export interface User {
     id: number;
     username: string;
-    name: string;
+    departamnet: string;
+    position: string;
     role: 'admin' | 'employee';
     email: string;
     phone?: string;

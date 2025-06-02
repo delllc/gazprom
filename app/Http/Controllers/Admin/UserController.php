@@ -12,10 +12,8 @@ use Inertia\Inertia;
 use Inertia\Response;
 use Illuminate\Auth\Events\Registered;
 
-
-
-class UserController extends Controller {
-
+class UserController extends Controller
+{
     public function create(): Response
     {
         return Inertia::render('auth/register');
@@ -34,7 +32,7 @@ class UserController extends Controller {
             // 'phone' => 'required|string|unique:users',
         ]);
 
-/*         $user = User::createByAdmin($validated); */
+        /*         $user = User::createByAdmin($validated); */
         $user = User::create([
             'username' => $request->username,
             'email' => $request->email,
@@ -60,10 +58,11 @@ class UserController extends Controller {
         return route_to('dashboard');
     }
 
-    public function index(Request $request) {
+    public function index(Request $request)
+    {
         return User::query()
-            ->when($request->departament, fn($q, $dept) => $q->where('departament', $dept))
-            ->when($request->search, fn($q, $search) => $q->where('name', 'like', '%' . $search . '%'))
+            ->when($request->departament, fn ($q, $dept) => $q->where('departament', $dept))
+            ->when($request->search, fn ($q, $search) => $q->where('name', 'like', '%' . $search . '%'))
             ->paginate(15);
     }
 }
