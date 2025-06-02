@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import SearchBar from './SearchBar';
 
 interface SearchResult {
     results: {
@@ -49,13 +50,14 @@ export const SearchDropdown: React.FC = () => {
 
     return (
         <div className="relative">
-            <input
-                type="text"
-                placeholder="Поиск..."
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                classNTopame="w-full rounded border p-2"
-            />
+            {/* <input */}
+            {/*     type="text" */}
+            {/*     placeholder="Поиск..." */}
+            {/*     value={query} */}
+            {/*     onChange={(e) => setQuery(e.target.value)} */}
+            {/*     className="w-full rounded border p-2" */}
+            {/* /> */}
+            <SearchBar type="text" placeholder="Поиск" value={query} onChange={(e) => setQuery(e.target.value)} />
 
             {/* Индикатор загрузки */}
             {loading && <div className="absolute top-2 right-2 text-gray-400">Загрузка...</div>}

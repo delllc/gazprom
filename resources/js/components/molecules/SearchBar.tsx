@@ -8,11 +8,11 @@ interface SearchBarProps {
     placeholder?: string;
 }
 
-const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder }) => {
+const SearchBar: React.FC<SearchBarProps> = ({ value, onChange, placeholder, ...props }) => {
     return (
         <div className="flex items-center rounded">
             <Icon name="search" className="mr-2 text-gray-500" />
-            <Input value={value} onChange={onChange} placeholder={placeholder || 'Поиск'} />
+            <Input value={value} onChange={onChange} placeholder={placeholder || 'Поиск'} {...props} />
         </div>
     );
 };
