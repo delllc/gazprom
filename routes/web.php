@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\NotebookController;
 use App\Http\Controllers\Pages\DocumentsController;
 use App\Http\Controllers\Pages\EmployeesController;
 use App\Http\Controllers\Search\SearchController;
@@ -15,6 +16,8 @@ Route::get('/employees', [EmployeesController::class, 'index'])->name('employees
 Route::get('/document', [DocumentsController::class, 'index'])->name('documents');
 
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+Route::get('/notebook', [NotebookController::class, 'notebook'])->name('notebook');
 
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('dashboard', function () {

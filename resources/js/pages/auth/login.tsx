@@ -34,12 +34,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
     };
 
     return (
-        <AuthLayout title="Log in to your account" description="Enter your email and password below to log in">
+        <AuthLayout title="Вход в систему" description="Для продолжения работы, пожалуйста, введите ваши учетные данные.">
             <Head title="Log in" />
-
             <form className="flex flex-col gap-6" onSubmit={submit}>
                 <div className="grid gap-6">
                     <div className="grid gap-2">
+                        <label htmlFor="email" className="text-muted-foreground text-sm">
+                            Email
+                        </label>
                         <Input
                             type="email"
                             required
@@ -58,6 +60,10 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                                 </TextLink>
                             )}
                         </div>
+
+                        <label htmlFor="password" className="text-muted-foreground text-sm">
+                            Пароль
+                        </label>
                         <Input
                             type="password"
                             required
@@ -70,18 +76,14 @@ export default function Login({ status, canResetPassword }: LoginProps) {
 
                     <Button type="submit" className="mt-4 w-full" disabled={processing}>
                         {processing && <LoaderCircle className="h-4 w-4 animate-spin" />}
-                        Log in
+                        Войти
                     </Button>
                 </div>
 
                 <div className="text-muted-foreground text-center text-sm">
-                    Don't have an account?{' '}
-                    <TextLink href={route('register')} tabIndex={5}>
-                        Sign up
-                    </TextLink>
+                    <TextLink tabIndex={5}>Восстановить пароль</TextLink>
                 </div>
             </form>
-
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}
         </AuthLayout>
     );

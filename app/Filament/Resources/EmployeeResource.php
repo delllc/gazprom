@@ -28,6 +28,7 @@ class EmployeeResource extends Resource
                 Forms\Components\TextInput::make('position')->required()->label('Позиция'),
                 Forms\Components\TextInput::make('phone')->required()->label('Телефон'),
                 Forms\Components\TextInput::make('email')->required()->label('Почта'),
+                Forms\Components\TextInput::make('password')->required()->label('Пароль'),
                 Forms\Components\Select::make('Роль')->required()->label('Роль')->options([
                     'admin' => 'Администратор',
                     'employee' => 'Сотрудник'

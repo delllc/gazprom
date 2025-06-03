@@ -13,7 +13,6 @@ interface EventCardProps {
 
 const EventCard: React.FC = ({ title, start_date, location, isAttending = false }) => {
     const date = new Date(start_date); // Конвертируем из секунд в миллисекунды
-    console.log(date);
 
     const formattedDate = date.toLocaleDateString('ru-RU'); // Например: "20.05.2025"
     const formattedTime = date.toLocaleTimeString('ru-RU', {
