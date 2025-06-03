@@ -3,15 +3,6 @@ import { Sidebar } from '@/components/organism/Sidebar';
 import { TopBar } from '@/components/organism/TopBar';
 import React from 'react';
 
-const events = [
-    {
-        title: 'Event 1',
-        dateTime: new Date(),
-        location: 'Moscow',
-        participants: ['andre', 'log'],
-    },
-];
-
 const sidebarMenu = [
     {
         label: 'Список сотрудников',
@@ -57,7 +48,7 @@ export const Layout: React.FC = ({ children }) => {
                 {/* Основное содержимое страницы */}
                 <main className="h-full overflow-auto bg-gray-100 p-6">{children}</main>
                 <div className="fixed top-[59px] right-0 h-full w-72 overflow-y-auto">
-                    <RightSidebar events={events} />
+                    <RightSidebar />
                 </div>
             </div>
         </div>

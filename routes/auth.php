@@ -14,8 +14,8 @@ use App\Http\Controllers\Auth\VerifyEmailController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotificationsController;
-use App\Http\Controllers\Search\SearchController;
 use App\Http\Controllers\TaskController;
 use Illuminate\Support\Facades\Route;
 
@@ -65,8 +65,9 @@ Route::middleware('auth')->group(function () {
 
     // Notify
     Route::get('/notifications', [NotificationsController::class, 'index']);
-    Route::post('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead']);
+    Route::patch('/notifications/{notification}/read', [NotificationsController::class, 'markAsRead']);
     Route::get('/notifications/unread-count', [NotificationsController::class, 'unreadCount']);
+
 
     Route::apiResource('events', EventController::class);
     Route::get('/events/{event}/participants', [EventController::class, 'getParticipants']);
@@ -79,6 +80,8 @@ Route::middleware('auth')->group(function () {
     Route::apiResource('media', MediaController::class)->middleware('admin');
     Route::apiResource('articles', ArticlesController::class);
 
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
 
     Route::apiResource('documents', DocumentController::class);
 });

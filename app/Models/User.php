@@ -7,8 +7,11 @@ use App\Notifications\AdminNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Panel;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Models\Contracts\HasName;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser, HasName
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
@@ -99,5 +102,17 @@ class User extends Authenticatable
     public function sendAdminAlert(string $message, string $changeType)
     {
         $this->notify(new AdminNotification($message, $changeType));
+
     }
+
+
+    public function getFilamentName(): string
+    {
+        return "{$this->username}";
+    }
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return str_ends_with($this->role, 'admin');
+    }
+
 }

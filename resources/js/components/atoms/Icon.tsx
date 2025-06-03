@@ -5,10 +5,11 @@ interface IconProps {
     className?: string;
     width?: number;
     height?: number;
+    onClick?: () => void;
 }
 
-const Icon: React.FC<IconProps> = ({ name, className, width = 24, height = 24 }) => {
-    return <LucideIcon icon={name} className={className} width={width} height={height} />;
+const Icon: React.FC<IconProps> = ({ name, className, width = 24, height = 24, onClick }) => {
+    return <LucideIcon icon={name} className={className} width={width} height={height} onClick={onClick} />;
 };
 
 export default Icon;

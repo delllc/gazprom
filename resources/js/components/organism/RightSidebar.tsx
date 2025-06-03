@@ -10,11 +10,7 @@ interface Event {
     participants: string[];
 }
 
-interface RightSidebarProps {
-    events: Event[];
-}
-
-export const RightSidebar: React.FC<RightSidebarProps> = ({ events }) => {
+export const RightSidebar: React.FC = () => {
     const [currentDate, setCurrentDate] = useState(new Date()); // текущий месяц/год
     const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
 
@@ -50,7 +46,7 @@ export const RightSidebar: React.FC<RightSidebarProps> = ({ events }) => {
                 {/* Список событий */}
                 <div className="mt-4">
                     <h3 className="border-b-black text-lg font-bold">Вы собираетесь на:</h3>
-                    <EventList events={events} />
+                    <EventList />
                 </div>
             </div>
         </aside>

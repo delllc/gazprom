@@ -26,7 +26,7 @@ export const TopBar: React.FC<TopBarProps> = ({ searchValue, onSearchChange, onS
 
             {/* Иконки справа */}
             <div className="flex items-center space-x-4">
-                <NotificationBell notificationsCount={notificationsCount} />
+                <NotificationBell />
                 <Text as="p" className="text-gray-500">
                     {auth.user.username}
                 </Text>

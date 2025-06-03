@@ -1,19 +1,24 @@
 import EventCard from '@/components/molecules/EventCard';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-interface EventListProps {
-    events: {
-        title: string;
-        dateTime: Date;
-        location: string;
-    }[];
-}
+export const EventList: React.FC = () => {
+    const [events, setEvents] = useState([]);
 
-export const EventList: React.FC<EventListProps> = ({ events }) => {
+    useEffect(() => {
+        fetch('/events')
+            .then((res) => res.json())
+            .then((data) => {
+                setEvents(data.events || []);
+            })
+            .catch((err) => {
+                console.error(err);
+            });
+    }, []);
+
     return (
         <div className="space-y-4">
-            {events.map((event, index) => (
-                <EventCard key={index} title={event.title} dateTime={event.dateTime} location={event.location} />
+            {events.map((event) => (
+                <EventCard title={event.title} start_date={event.start_date} location={event.location} />
             ))}
         </div>
     );
