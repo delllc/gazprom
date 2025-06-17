@@ -24,11 +24,6 @@ class Events extends Model
     ];
 
     // Отношения
-    public function creator()
-    {
-        return $this->belongsTo(User::class, 'created_by');
-    }
-
     public function participants()
     {
         return $this->belongsToMany(User::class, 'event_user');

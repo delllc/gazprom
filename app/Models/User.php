@@ -84,10 +84,6 @@ class User extends Authenticatable implements FilamentUser, HasName
         return $this->hasMany(Tasks::class);
     }
 
-    public function events()
-    {
-        return $this->belongsToMany(Events::class, 'event_user');
-    }
     //
     public function notifications()
     {
@@ -114,5 +110,4 @@ class User extends Authenticatable implements FilamentUser, HasName
     {
         return str_ends_with($this->role, 'admin');
     }
-
 }

@@ -70,11 +70,12 @@ Route::middleware('auth')->group(function () {
 
 
     Route::apiResource('events', EventController::class);
+    Route::post('/events', [EventController::class, 'store']);
     Route::get('/events/{event}/participants', [EventController::class, 'getParticipants']);
     Route::get('/events/{event}/participants/all', [EventController::class, 'getAllParticipants']);
 
 
-    Route::apiResource('tasks', TaskController::class);
+    Route::get('/tasks', [TaskController::class, 'tasks'])->name('tasks');
     Route::apiResource('users', UserController::class);
     Route::apiResource('documents', DocumentController::class);
     Route::apiResource('media', MediaController::class)->middleware('admin');

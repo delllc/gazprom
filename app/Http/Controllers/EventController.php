@@ -18,16 +18,13 @@ class EventController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'description' => 'nullable|string',
             'start_date' => 'required|date',
-            'end_date' => 'required|date',
             'location' => 'required|string',
-            'max_participants' => 'required|exists:users,id',
-            'created_by' => 'required|exists:users,id',
         ]);
 
+        $event = Events::create($validated);
 
-        return auth()->user()->events()->create($validated);
+        return $event;
     }
 
     public function getParticipants(Events $event)
