@@ -31,6 +31,7 @@ export default function Dashboard() {
             });
     }, []);
 
+    console.log(news);
     return (
         <Layout>
             {/* Заголовок страницы */}

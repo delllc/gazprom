@@ -9,7 +9,7 @@ class NewsController extends Controller
 {
     public function index(): JsonResponse
     {
-        $news = News::with('user')->latest()->take(5)->get();
+        $news = News::with('user')->get();
 
         return response()->json($news);
     }

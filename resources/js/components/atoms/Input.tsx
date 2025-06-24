@@ -7,7 +7,7 @@ function Input({ className, ...props }: React.ComponentProps<'input'>) {
 
     return (
         <div className="relative h-[38px] w-[388px] border border-[#D5D5D5] bg-[#F5F6FA]">
-            <Icon name="mdi:search" className="absolute top-[11px] left-[16px] opacity-50" width={15} height={15} />
+            {props.isIcon && <Icon name="mdi:search" className="absolute top-[11px] left-[16px] opacity-50" width={15} height={15} />}
             <input className={inputClasses} {...props} />
         </div>
     );

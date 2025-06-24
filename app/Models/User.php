@@ -74,7 +74,7 @@ class User extends Authenticatable implements FilamentUser, HasName
             'email' => $data['email'],
             'username' => $data['username'],
             'password' => bcrypt($data['password']),
-            'role' => $data['role'] ?? self::ROLE_EMPLOYEE,
+            'role' => $data['role'],
             'phone' => $data['phone'] ?? null,
         ]);
     }
@@ -100,6 +100,7 @@ class User extends Authenticatable implements FilamentUser, HasName
         $this->notify(new AdminNotification($message, $changeType));
 
     }
+
 
 
     public function getFilamentName(): string
