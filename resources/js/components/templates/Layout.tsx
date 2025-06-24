@@ -5,6 +5,10 @@ import React from 'react';
 
 const sidebarMenu = [
     {
+        label: 'Главная',
+        to: '/dashboard',
+    },
+    {
         label: 'Список сотрудников',
         to: '/employees',
     },
@@ -22,20 +26,12 @@ const sidebarMenu = [
     },
 
     {
-        label: 'Мультимедийная библиотека',
-        to: '',
-    },
-    {
-        label: 'Внедрение ПО',
-        to: '',
-    },
-    {
-        label: 'Сертификация ГГШ',
-        to: '',
-    },
-    {
         label: 'Блокнот',
         to: '/notebook',
+    },
+    {
+        label: 'Задачи',
+        to: '/tasks',
     },
 ];
 

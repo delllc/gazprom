@@ -35,7 +35,7 @@ export const AddEventModal: React.FC<AddEventModalProps> = ({ isOpen, onClose })
         }
     };
     return (
-        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
+        <div className="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center">
             <div className="w-[400px] rounded bg-white p-6 shadow-lg">
                 <h2 className="mb-4 text-xl font-bold">Добавить мероприятие</h2>
 

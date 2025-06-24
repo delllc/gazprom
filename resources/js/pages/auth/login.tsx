@@ -53,14 +53,6 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                     </div>
 
                     <div className="grid gap-2">
-                        <div className="flex items-center">
-                            {canResetPassword && (
-                                <TextLink href={route('password.request')} className="ml-auto text-sm" tabIndex={5}>
-                                    Forgot password?
-                                </TextLink>
-                            )}
-                        </div>
-
                         <label htmlFor="password" className="text-muted-foreground text-sm">
                             Пароль
                         </label>
@@ -81,7 +73,9 @@ export default function Login({ status, canResetPassword }: LoginProps) {
                 </div>
 
                 <div className="text-muted-foreground text-center text-sm">
-                    <TextLink tabIndex={5}>Восстановить пароль</TextLink>
+                    <TextLink tabIndex={5} onClick={route('password.request')}>
+                        Восстановить пароль
+                    </TextLink>
                 </div>
             </form>
             {status && <div className="mb-4 text-center text-sm font-medium text-green-600">{status}</div>}

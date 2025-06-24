@@ -55,7 +55,9 @@ const NotificationBell: React.FC = () => {
         <div className="relative">
             <Icon
                 name="mdi-bell"
-                className="h-6 w-6 cursor-pointer text-gray-700 transition hover:text-blue-600"
+                width={20}
+                height={20}
+                className="cursor-pointer text-gray-700 transition hover:text-blue-600"
                 onClick={() => setIsOpen(!isOpen)}
             />
 

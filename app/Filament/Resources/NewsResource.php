@@ -25,6 +25,8 @@ class NewsResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('title')->required()->label('Заголовок'),
                 Forms\Components\TextInput::make('content')->required()->label('Контент'),
+
+                Forms\Components\FileUpload::make('image')->directory('public')->required()->label('Photo'),
                 Forms\Components\TextInput::make('author_id')->required()->label('Чья новость'),
                 Forms\Components\TextInput::make('published_at')->required()->label('Когда опубликована'),
             ]);

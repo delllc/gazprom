@@ -1,4 +1,3 @@
-import Button from '@/components/atoms/Button';
 import { Calendar } from '@/components/organism/Calendar';
 import { EventList } from '@/components/organism/EventList';
 import React, { useState } from 'react';
@@ -40,12 +39,6 @@ export const RightSidebar: React.FC = () => {
             />
             <div className="mt-4 rounded bg-white p-4 shadow-sm">
                 {/* Кнопка "Добавить мероприятие" */}
-                <div className="mt-4">
-                    <Button className="w-[100%]" size="small" onClick={() => setIsModalOpen(true)}>
-                        + Добавить мероприятие
-                    </Button>
-                </div>
-
                 {/* Список событий */}
                 <div className="mt-4">
                     <h3 className="border-b-black text-lg font-bold">Вы собираетесь на:</h3>
